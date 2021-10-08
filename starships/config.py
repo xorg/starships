@@ -12,13 +12,16 @@ class Config(object):
     except KeyError:
         SECRET_KEY = "dev-secret-key"
 
+    # setting this to true or false will suppress warning
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 
 class Dev(Config):
-    SQLALCHEMY_DATABASE_URI = f"sqlite:////{basedir}/dev_db.sqlite"
+    SQLALCHEMY_DATABASE_URI = f"sqlite:////{basedir}/../dev_db.sqlite"
     DEBUG = True
 
 
 class Test(Config):
-    SQLALCHEMY_DATABASE_URI = f"sqlite:////{basedir}/test_db.sqlite"
+    SQLALCHEMY_DATABASE_URI = f"sqlite:////{basedir}/../test_db.sqlite"
     TESTING = True
     DEBUG = True
