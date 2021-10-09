@@ -13,8 +13,8 @@ python -m pytest
 ```
 
 ## Considerations
-With more time I would have secured the POST endpoint with a JWT token or basic auth. In addition to that I would
-cache the technial information about the ships in separate database columns for each field instead of one text blob. This would make it possible to
+With more time I would have secured the POST endpoint with a JWT token or basic auth. In addition to that I would have
+cached the technial information about the ships in separate database columns for each field instead of one text blob. This would've made it possible to
 query ships by technical info.
 
-The unit tests are quite minimal as well, with more time I would extend the test cases and provide data fixtures to test the list endpoint isolated from the create endpoints.
+The unit tests are quite minimal as well, with more time I would extend the test cases and provide data fixtures to test the GET endpoints isolated from the POST endpoint.
