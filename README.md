@@ -4,6 +4,7 @@ Simple flask app to view and store starships. Fetches additional information via
 ## Usage
 ```
 pip install -r requirements.txt
+cp .env.example .env
 flask run
 ```
 
