@@ -21,7 +21,7 @@ def client():
             db.create_all()
         yield client
 
-    db_path = app.config['SQLALCHEMY_DATABASE_URI'].split('sqlite:///')[-1]
+    db_path = app.config["SQLALCHEMY_DATABASE_URI"].split("sqlite:///")[-1]
     os.unlink(db_path)
 
 

@@ -5,7 +5,6 @@ from marshmallow import fields, Schema
 class JsonField(fields.Str):
     """Field that stores a json blob and serializes it to a python dict
     """
-
     def _serialize(self, value, attr, obj, **kwargs):
         if value is None:
             return ""

@@ -10,7 +10,6 @@ from requests.models import HTTPError
 from .models import Starship, AdditionalInfo, db
 from .schemas import StarshipSchema
 
-
 api_bp = Blueprint("api", __name__)
 starship_schema = StarshipSchema()
 
@@ -36,6 +35,8 @@ def show_starship(id):
     """
     starship = Starship.query.filter(Starship.id == id).first()
     data = starship_schema.dump(starship)
+    if not starship:
+        return response(404, "Starship not found")
     return jsonify(data)
 
 
@@ -47,7 +48,7 @@ def create_starship():
         A single starship
     """
     # check if request has the correct media type
-    if not request.headers.get('Content-Type') == "application/json":
+    if not request.headers.get("Content-Type") == "application/json":
         return response(415, None)
 
     req_data = request.get_json()
@@ -61,7 +62,8 @@ def create_starship():
     starship = Starship(data)
 
     # try to fetch info from database
-    info = AdditionalInfo.query.filter(AdditionalInfo.id == starship.model_id).first()
+    info = AdditionalInfo.query.filter(
+        AdditionalInfo.id == starship.model_id).first()
     if info:
         starship.additional_info = info
     else:
@@ -88,7 +90,7 @@ def fetch_info(id):
     print(f"Fetching info for model #{id}")
     resp = requests.get(f"https://swapi.dev/api/starships/{id}")
 
-    # raise an exception if there's an http error
+    # raise an exception if there"s an http error
     resp.raise_for_status()
 
     data = resp.content
@@ -103,8 +105,6 @@ def response(status, data):
     Helper function to create custom responses
     """
 
-    return Response(
-        mimetype="application/json",
-        response=json.dumps(data),
-        status=status
-    )
+    return Response(mimetype="application/json",
+                    response=json.dumps(data),
+                    status=status)
