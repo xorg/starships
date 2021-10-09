@@ -1,3 +1,4 @@
+import uuid
 from flask import Blueprint
 from flask import request, g, Blueprint, json, Response
 from flask import jsonify
@@ -48,13 +49,11 @@ def create_starship():
     except ValidationError as e:
         return response(400, e.messages)
 
-    starship = Starship(data)
-
-    # starship.additional_info = fetch_info(starship.model_id)
+    starship = Starship(data)   
 
     # add random registration uuid if not given
-    # if not starship.registration_number:
-    #     starship.registration_number =
+    if not starship.registration_number:
+        starship.registration_number = str(uuid.uuid4())
 
     # commit object to database
     db.session.add(starship)
