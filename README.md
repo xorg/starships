@@ -1,5 +1,5 @@
 # Starships
-Simple flask app to view and store starships. Fetches additional information via swapi.dev API. Written in Python 3.9
+Simple flask app to view and store starships. Fetches additional information via [swapi.dev](https://swapi.dev) API. Written in Python 3.9
 
 ## Usage
 ```
