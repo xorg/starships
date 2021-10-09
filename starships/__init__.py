@@ -13,7 +13,7 @@ def create_app():
     app_env = os.environ.get("FLASK_ENV")
     app.config.from_object(f"starships.config.{app_env.capitalize()}")
 
-    # initialize blueprint
+    # initialize api blueprint
     app.register_blueprint(api_bp)
 
     # initialize database

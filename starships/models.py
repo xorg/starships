@@ -5,6 +5,7 @@ db = SQLAlchemy()
 
 class Starship(db.Model):
     """Owned starship"""
+
     def __init__(self, data):
         """This method allows the creation of a Starship model
         directly from schema validated data
@@ -25,6 +26,7 @@ class Starship(db.Model):
 
 class AdditionalInfo(db.Model):
     """Starship model information cache"""
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     starships = db.relationship(Starship, backref="additional_info", lazy=True)
     info = db.Column(db.Text())

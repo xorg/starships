@@ -19,8 +19,9 @@ def list_starship():
     """View list of all owned starships
 
     Returns:
-        A list of all starships stored in database
+        A json list of all starships stored in database
     """
+
     starships = Starship.query.all()
     data = starship_schema.dump(starships, many=True)
     return jsonify(data)
@@ -31,8 +32,9 @@ def show_starship(id):
     """View a single starship
 
     Returns:
-        A single starship
+        A json object containing single starship
     """
+
     starship = Starship.query.filter(Starship.id == id).first()
     data = starship_schema.dump(starship)
     if not starship:
@@ -45,8 +47,9 @@ def create_starship():
     """Save a starship to database
 
     Returns:
-        A single starship
+        The created starship as a json object
     """
+
     # check if request has the correct media type
     if not request.headers.get("Content-Type") == "application/json":
         return response(415, None)
@@ -87,7 +90,7 @@ def create_starship():
 
 def fetch_info(id):
     """Fetches additional starship info from external api"""
-    print(f"Fetching info for model #{id}")
+
     resp = requests.get(f"https://swapi.dev/api/starships/{id}")
 
     # raise an exception if there"s an http error
