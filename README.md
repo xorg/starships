@@ -20,4 +20,4 @@ query ships by technical info.
 
 The unit tests are quite minimal as well, with more time I would extend the test cases and provide data fixtures to test the GET endpoints isolated from the POST endpoint.
 
-A last thing I would've done with more time is to make the error handling more consistent and clear. When the SWAPI API returns a 404 I just pass the error on instead of making a custom error message indicating where exactly the error happened.
+A last thing I would've done with more time is to make the error handling more consistent and clear. When the SWAPI API returns a 404 for example I just pass the error on instead of making a custom error message indicating where exactly the error happened.
