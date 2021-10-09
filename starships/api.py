@@ -19,7 +19,8 @@ def list_starship():
         A list of all starships stored in database
     """
     starships = Starship.query.all()
-    return jsonify(starships)
+    data = starship_schema.dump(starships, many=True)
+    return jsonify(data)
 
 
 @api_bp.route("/api/starships/<int:id>", methods=["GET"])
@@ -29,8 +30,9 @@ def show_starship(id):
     Returns:
         A single starship
     """
-    starships = Starship.query.filter(Starship.id == id).first()
-    return jsonify(starships)
+    starship = Starship.query.filter(Starship.id == id).first()
+    data = starship_schema.dump(starship)
+    return jsonify(data)
 
 
 @api_bp.route("/api/starships", methods=["POST"])
@@ -41,7 +43,6 @@ def create_starship():
         A single starship
     """
     req_data = request.get_json()
-    print(starship_schema.load(req_data))
     try:
         data = starship_schema.load(req_data)
     except ValidationError as e:
@@ -53,7 +54,7 @@ def create_starship():
 
     # add random registration uuid if not given
     # if not starship.registration_number:
-    #     starship.registration_number = 
+    #     starship.registration_number =
 
     # commit object to database
     db.session.add(starship)
