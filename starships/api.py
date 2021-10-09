@@ -59,7 +59,11 @@ def create_starship():
 
     starship = Starship(data)
 
-    if not starship.additional_info:
+    # try to fetch info from database
+    info = AdditionalInfo.query.filter(AdditionalInfo.id == starship.model_id).first()
+    if info:
+        starship.additional_info = info
+    else:
         try:
             info = fetch_info(starship.model_id)
             starship.additional_info = info
