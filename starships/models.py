@@ -20,20 +20,12 @@ class Starship(db.Model):
     nickname = db.Column(db.String(80))
     owner = db.Column(db.String(80))
     registration_number = db.Column(db.String(80))
-    model_id = db.Column(db.Integer)
-    additional_info = db.relationship(
-        "AdditionalInfo",
-        backref=db.backref("starships", lazy=True),
-    )
+    model_id = db.Column(db.Integer, db.ForeignKey('additional_info.id'),
+        nullable=False)
 
 
 class AdditionalInfo(db.Model):
     """Starship model information cache"""
-
-    id: int
-    model_id: int
-    info: str
-
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    model_id = db.Column(db.Integer, db.ForeignKey("starship.id"), nullable=False)
+    starships = db.relationship(Starship, backref='additional_info', lazy=True)
     info = db.Column(db.Text())

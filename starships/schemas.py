@@ -1,4 +1,10 @@
-from marshmallow import fields, Schema, INCLUDE
+from marshmallow import fields, Schema
+
+
+
+class AdditionalInfoSchema(Schema):
+    id = fields.Int()
+    info = fields.Str()
 
 
 class StarshipSchema(Schema):
@@ -11,7 +17,4 @@ class StarshipSchema(Schema):
     owner = fields.Str(required=True)
     registration_number = fields.Str()
     model_id = fields.Int(required=True)
-    additional_info = fields.Raw(dump_only=True)
-
-    class Meta:
-        unknown = INCLUDE
+    additional_info = fields.Nested(AdditionalInfoSchema, dump_only=True)
