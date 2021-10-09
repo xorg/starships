@@ -1,8 +1,9 @@
 import uuid
 import requests
 from flask import Blueprint
-from flask import request, g, Blueprint, json, Response
+from flask import Response
 from flask import jsonify
+from flask import json
 from flask import request
 from marshmallow.exceptions import ValidationError
 from requests.models import HTTPError
